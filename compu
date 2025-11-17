@@ -1,0 +1,36 @@
+import { useState } from 'react';
+import { Home } from './components/Home';
+import { ModuleHardware } from './components/ModuleHardware';
+import { ModuleSoftware } from './components/ModuleSoftware';
+import { ModuleInternet } from './components/ModuleInternet';
+import { Activities } from './components/Activities';
+
+export type Page = 'home' | 'hardware' | 'software' | 'internet' | 'activities';
+
+export default function App() {
+  const [currentPage, setCurrentPage] = useState<Page>('home');
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <Home onNavigate={setCurrentPage} />;
+      case 'hardware':
+        return <ModuleHardware onNavigate={setCurrentPage} />;
+      case 'software':
+        return <ModuleSoftware onNavigate={setCurrentPage} />;
+      case 'internet':
+        return <ModuleInternet onNavigate={setCurrentPage} />;
+      case 'activities':
+        return <Activities onNavigate={setCurrentPage} />;
+      default:
+        return <Home onNavigate={setCurrentPage} />;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+      {renderPage()}
+    </div>
+  );
+}
+
